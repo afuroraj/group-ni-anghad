@@ -1,2 +1,0 @@
-# group-ni-anghad
-Portfolio
