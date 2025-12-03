@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SwapStop Project Gallery</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0a0a12;
+            --bg-secondary: #13131f;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            
+            --accent-primary: #00f2ea; 
+            --accent-secondary: #ff0055; 
+            --accent-tertiary: #7000ff; 
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --transition-speed: 0.3s;
+        }
+
+        body.light-mode {
+            --bg-color: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a1a2e; 
+            --text-secondary: #555566; 
+
+            --accent-primary: #007bff; 
+            --accent-secondary: #ff0055; 
+            --accent-tertiary: #7000ff; 
+            --glass-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            padding-top: 100px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 30px 0;
+        }
+
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-secondary);
+            border-bottom: 1px solid var(--glass-border);
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+        }
+
+        .header-content h1 {
+            font-size: 2.2rem;
+            color: var(--text-primary);
+        }
+        
+        .header-content h1 span {
+            color: var(--accent-primary);
+        }
+        
+        body.light-mode .header-content h1 {
+            color: var(--text-primary);
+        }
+        body.light-mode .header-content h1 span {
+            color: var(--accent-primary);
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--accent-primary);
+            border: 1px solid var(--accent-primary);
+            transition: var(--transition-speed);
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-secondary);
+        }
+       
+        body.light-mode .back-btn {
+            color: var(--accent-primary);
+        }
+
+        .back-btn:hover {
+            background-color: var(--accent-primary);
+            color: var(--bg-secondary);
+        }
+        body.light-mode .back-btn:hover {
+            color: #fff; 
+        }
+
+        .gallery-grid {
+            display: flex; 
+            flex-wrap: wrap;
+            justify-content: center; 
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            flex: 1 1 300px;
+            max-width: 500px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            border: 1px solid var(--glass-border);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .gallery-caption {
+            background-color: var(--bg-secondary);
+            padding: 15px;
+            border-top: 1px solid var(--glass-border);
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        body.light-mode .gallery-caption {
+            color: var(--text-primary);
+        }
+
+        footer {
+            text-align: center; 
+            padding: 40px 0; 
+            color: var(--text-secondary); 
+            border-top: 1px solid var(--glass-border);
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const toggleButton = document.getElementById('theme-toggle-gallery');
+            
+            if (localStorage.getItem('theme') === 'light-mode') {
+                body.classList.add('light-mode');
+                toggleButton.querySelector('i').classList.remove('fa-sun');
+                toggleButton.querySelector('i').classList.add('fa-moon');
+            }
+
+            toggleButton.addEventListener('click', () => {
+                body.classList.toggle('light-mode');
+                const isLight = body.classList.contains('light-mode');
+                
+                if (isLight) {
+                    localStorage.setItem('theme', 'light-mode');
+                    toggleButton.querySelector('i').classList.remove('fa-sun');
+                    toggleButton.querySelector('i').classList.add('fa-moon');
+                } else {
+                    localStorage.setItem('theme', 'dark-mode');
+                    toggleButton.querySelector('i').classList.remove('fa-moon');
+                    toggleButton.querySelector('i').classList.add('fa-sun');
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+
+    <header>
+        <div class="header-content container">
+            <h1>SwapStop: <span>Prototype Gallery</span></h1>
+            <div style="display: flex; gap: 20px; align-items: center;">
+                <button id="theme-toggle-gallery" aria-label="Toggle Light/Dark Mode" style="background: none; border: none; color: var(--text-primary); font-size: 1.2rem; cursor: pointer;">
+                    <i class="fas fa-sun"></i>
+                </button>
+                <a href="main.html" class="back-btn">
+                    <i class="fas fa-arrow-left" style="margin-right: 10px;"></i> Back to Portfolio
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <div class="gallery-grid">
+            
+            <div class="gallery-item">
+                <img src="1.png" alt="SwapStop Welcome Screen" onerror="this.onerror=null; this.src='https://placehold.co/600x400/7000ff/ffffff?text=Screen+1';" />
+                <div class="gallery-caption">Screen 1: Homepage</div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="2.png" alt="SwapStop Item Listing Form" onerror="this.onerror=null; this.src='https://placehold.co/600x400/007bff/ffffff?text=Screen+2';" />
+                <div class="gallery-caption">Screen 2: Categories Page</div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="3.png" alt="SwapStop Homepage" onerror="this.onerror=null; this.src='https://placehold.co/600x400/ff0055/ffffff?text=Screen+3';" />
+                <div class="gallery-caption">Screen 3: Overview Page</div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="4.png" alt="SwapStop Item Detail" onerror="this.onerror=null; this.src='https://placehold.co/600x400/00f2ea/0a0a12?text=Screen+4';" />
+                <div class="gallery-caption">Screen 4: Profile Page</div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="5.png" alt="SwapStop User Profile" onerror="this.onerror=null; this.src='https://placehold.co/600x400/7000ff/ffffff?text=Screen+5';" />
+                <div class="gallery-caption">Screen 5: Post Page</div>
+            </div>
+            
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 SwapStop Prototype. Developed by Group ni Anghad.</p>
+    </footer>
+</body>
+</html>
